@@ -1,4 +1,4 @@
-/* RESET */
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
@@ -7,16 +7,19 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
   font-family: "Georgia", serif;
   background: #f4f1ea;
   color: #111;
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: background 0.4s ease, color 0.4s ease, opacity 0.4s ease;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
 }
 
-/* DARK MODE */
+/* ================= DARK MODE ================= */
 body.dark {
   background: #0f0f0f;
   color: #f5f5f5;
@@ -31,17 +34,26 @@ body.dark .work-item {
   background: #1a1a1a;
 }
 
-/* NAV */
+body.dark .btn {
+  background: white;
+  color: black;
+}
+
+/* ================= NAVBAR ================= */
 .navbar {
   position: fixed;
   width: 100%;
   padding: 20px 60px;
-  display: flex;
-  justify-content: space-between;
   background: #ffffff;
   border-bottom: 1px solid #eee;
   z-index: 1000;
   transition: 0.3s ease;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -76,18 +88,19 @@ body.dark .work-item {
   width: 100%;
 }
 
-/* DARK TOGGLE */
 .toggle {
   cursor: pointer;
   font-size: 1.2rem;
 }
 
-/* SECTION */
+/* ================= SECTIONS ================= */
 .section {
   min-height: 100vh;
   padding: 160px 80px 80px;
   display: flex;
   align-items: center;
+  position: relative;
+  scroll-snap-align: start;
 }
 
 .content {
@@ -95,7 +108,7 @@ body.dark .work-item {
   margin: auto;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 .hero-inner {
   display: flex;
   gap: 70px;
@@ -122,6 +135,12 @@ h2 {
   margin-bottom: 40px;
 }
 
+.tagline {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ================= BUTTON ================= */
 .btn {
   display: inline-block;
   margin-top: 25px;
@@ -136,7 +155,7 @@ h2 {
   opacity: 0.8;
 }
 
-/* GRID */
+/* ================= GRID ================= */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
@@ -167,7 +186,7 @@ h2 {
   transform: translateY(-10px);
 }
 
-/* FILTERS */
+/* ================= FILTERS ================= */
 .filters {
   margin: 30px 0;
 }
@@ -178,6 +197,7 @@ h2 {
   border: 1px solid #333;
   background: transparent;
   cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .filters button.active {
@@ -185,7 +205,7 @@ h2 {
   color: white;
 }
 
-/* FORM */
+/* ================= FORM ================= */
 form {
   display: flex;
   flex-direction: column;
@@ -200,17 +220,66 @@ input, textarea {
   color: inherit;
 }
 
-/* LOADER */
-#loader {
+/* ================= BACKGROUND TYPOGRAPHY ================= */
+.bg-text {
+  position: absolute;
+  font-size: 8rem;
+  opacity: 0.03;
+  top: 40%;
+  left: 10%;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ================= CUSTOM CURSOR ================= */
+body {
+  cursor: none;
+}
+
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid black;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: 0.1s ease;
+  z-index: 5000;
+}
+
+body.dark .cursor {
+  border-color: white;
+}
+
+/* ================= CINEMATIC INTRO ================= */
+#intro {
   position: fixed;
   width: 100%;
   height: 100vh;
-  background: #111;
+  background: black;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
-  z-index: 2000;
+  z-index: 3000;
+  animation: introFade 2.5s ease forwards;
 }
 
+.intro-text {
+  font-size: 4rem;
+  letter-spacing: 8px;
+  opacity: 0;
+  animation: fadeInText 1.5s ease forwards 0.5s;
+}
+
+@keyframes fadeInText {
+  to { opacity: 1; }
+}
+
+@keyframes introFade {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
