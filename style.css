@@ -373,3 +373,20 @@ footer {
   }
 }
 
+/* HERO MOBILE FIX */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: row; /* keep images and text side-by-side */
+    align-items: center;
+    gap: 15px;
+  }
+
+  .hero-left img {
+    width: 120px; /* smaller so it fits */
+  }
+
+  .hero-right h1 {
+    font-size: 1.6rem; /* smaller text */
+  }
+}
+
